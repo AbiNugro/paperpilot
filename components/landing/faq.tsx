@@ -22,7 +22,7 @@ export function Faq() {
     <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-3xl px-5">
         <SectionHeading eyebrow="FAQ" title="A few things worth knowing." />
-        <div className="mt-12 divide-y divide-black/[.08] border-y border-black/[.08]">
+        <div data-reveal className="reveal-on-scroll mt-12 divide-y divide-black/[.08] border-y border-black/[.08]">
           {faqs.map(([question, answer], index) => {
             const isOpen = openIndex === index;
             const contentId = `faq-content-${index}`;

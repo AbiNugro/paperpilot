@@ -53,7 +53,7 @@ export function ButtonLink({
   return (
     <a
       href={href}
-      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-[11px] px-5 py-2.5 text-sm font-semibold transition-[transform,background-color,box-shadow] duration-150 ease-out active:scale-[0.96] ${variants[variant]} ${className}`}
+      className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-[11px] px-5 py-2.5 text-sm font-semibold transition-[transform,background-color,box-shadow] duration-150 ease-out hover:-translate-y-px active:translate-y-0 active:scale-[0.985] ${variants[variant]} ${className}`}
     >
       {children}
     </a>
@@ -76,15 +76,15 @@ export function SectionHeading({
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : "text-left"} ${className}`}>
       {eyebrow && (
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#3766d7]">
+          <p data-reveal className="reveal-on-scroll reveal-heading-eyebrow mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#3766d7]">
           {eyebrow}
         </p>
       )}
-      <h2 className="text-balance text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.045em] text-[#0c1529]">
+      <h2 data-reveal className="reveal-on-scroll reveal-heading-title text-balance text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.045em] text-[#0c1529]">
         {title}
       </h2>
       {copy && (
-        <p className="text-pretty mx-auto mt-5 max-w-2xl text-base leading-7 text-[#626a79] sm:text-lg">
+        <p data-reveal className="reveal-on-scroll reveal-heading-copy text-pretty mx-auto mt-5 max-w-2xl text-base leading-7 text-[#626a79] sm:text-lg">
           {copy}
         </p>
       )}

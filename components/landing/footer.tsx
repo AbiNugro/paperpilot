@@ -5,10 +5,10 @@ export function FinalCta() {
   return (
     <section className="px-5 pb-10 sm:pb-14">
       <div className="relative mx-auto max-w-[1180px] overflow-hidden rounded-[24px] bg-[#1f55d5] px-5 py-16 text-center text-white shadow-[0_24px_70px_-30px_rgba(29,78,216,.6)] sm:px-10 sm:py-20">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-15%,rgba(255,255,255,.27),transparent_42%),radial-gradient(circle_at_85%_110%,rgba(91,57,218,.38),transparent_38%)]" />
+        <div aria-hidden="true" className="ambient-shift absolute inset-0 bg-[radial-gradient(circle_at_50%_-15%,rgba(255,255,255,.27),transparent_42%),radial-gradient(circle_at_85%_110%,rgba(91,57,218,.38),transparent_38%)]" />
         <div aria-hidden="true" className="absolute left-12 top-10 size-28 rounded-full border border-white/[.08] sm:size-48" />
         <div aria-hidden="true" className="absolute bottom-[-80px] right-[-30px] size-56 rounded-full border border-white/[.08] sm:size-72" />
-        <div className="relative z-10">
+        <div data-reveal className="reveal-on-scroll reveal-scale relative z-10">
           <div className="mx-auto mb-7 flex w-fit justify-center rounded-[12px] bg-white p-1 shadow-[0_9px_24px_-12px_rgba(4,18,57,.45)]"><Brand /></div>
           <h2 className="text-balance mx-auto max-w-3xl text-[clamp(2.4rem,5vw,4.7rem)] font-semibold leading-[1] tracking-[-.055em]">Your paperwork isn&apos;t going away. The confusion can.</h2>
           <p className="text-pretty mx-auto mt-6 max-w-xl text-base leading-7 text-[#dbe6ff] sm:text-lg">Let PaperPilot turn documents into clear next steps.</p>

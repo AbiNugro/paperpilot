@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { MotionObserver } from "@/components/landing/motion";
 
 export const metadata: Metadata = {
   title: "PaperPilot — From paperwork to done",
@@ -14,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="antialiased scroll-smooth">
-      <body>{children}</body>
+      <body><MotionObserver>{children}</MotionObserver></body>
     </html>
   );
 }

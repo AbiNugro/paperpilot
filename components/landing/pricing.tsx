@@ -58,11 +58,12 @@ export function Pricing() {
           title="Simple plans for simpler paperwork."
           copy="Start with a few documents, then choose the workspace that matches how much life admin comes your way."
         />
-        <div className="mt-14 grid items-stretch gap-4 lg:grid-cols-3">
+        <div className="motion-stagger mt-14 grid items-stretch gap-4 lg:grid-cols-3">
           {pricingPlans.map((plan) => (
             <article
               key={plan.name}
-              className={`relative flex flex-col rounded-[18px] p-6 sm:p-8 ${
+              data-reveal
+              className={`reveal-on-scroll reveal-scale relative flex flex-col rounded-[18px] p-6 sm:p-8 ${
                 "popular" in plan && plan.popular
                   ? "bg-[#101b36] text-white shadow-[0_0_0_1px_rgba(15,23,42,.1),0_25px_65px_-28px_rgba(30,64,175,.5)] lg:-translate-y-3"
                   : "surface bg-white text-[#111a2e]"

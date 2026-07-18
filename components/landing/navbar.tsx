@@ -17,7 +17,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 12);
+    const handleScroll = () => setScrolled(window.scrollY > 64);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -27,7 +27,7 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <nav
         aria-label="Primary navigation"
-        className={`mx-auto max-w-[1180px] rounded-[15px] px-3 transition-[background-color,box-shadow,backdrop-filter] duration-200 [transition-timing-function:var(--ease-out)] sm:px-4 ${
+        className={`motion-nav-enter mx-auto max-w-[1180px] rounded-[15px] px-3 transition-[background-color,box-shadow,backdrop-filter] duration-200 [transition-timing-function:var(--ease-out)] sm:px-4 ${
           scrolled || open
             ? "bg-[rgba(255,255,255,.88)] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_10px_35px_-20px_rgba(15,23,42,.3)] backdrop-blur-xl"
             : "bg-transparent"

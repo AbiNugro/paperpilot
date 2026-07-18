@@ -35,13 +35,13 @@ const deadlines = [
 function DashboardMockup() {
   return (
     <div className="dashboard-enter relative mx-auto mt-14 max-w-[1100px] px-3 sm:mt-20 sm:px-8 lg:px-12">
-      <div className="float-one absolute -left-2 top-[18%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:left-0">
+      <div className="label-enter label-one absolute -left-2 top-[18%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:left-0">
         <CheckCircle2 className="size-4 text-[#2f77e7]" /> Document analyzed
       </div>
-      <div className="float-two absolute -right-1 top-[35%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:right-0">
+      <div className="label-enter label-two absolute -right-1 top-[35%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:right-0">
         <WandSparkles className="size-4 text-[#4f46e5]" /> 4 actions generated
       </div>
-      <div className="absolute -bottom-4 right-[15%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex">
+      <div className="label-enter label-three absolute -bottom-4 right-[15%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex">
         <Clock3 className="size-4 text-[#c48526]" /> Deadline detected
       </div>
 
@@ -61,7 +61,7 @@ function DashboardMockup() {
               <div className="mb-4 px-2"><Brand compact /></div>
               <div className="space-y-1">
                 {sidebarItems.map(([Icon, label, active]) => (
-                  <div key={label} className={`flex h-9 items-center gap-2.5 rounded-[8px] px-2.5 text-[10px] font-medium lg:text-[11px] ${active ? "bg-[#dfeafd] text-[#245cc7] shadow-[inset_0_0_0_1px_rgba(37,99,235,.06)]" : "text-[#687287]"}`}>
+                  <div key={label} className={`dashboard-nav-item flex h-9 items-center gap-2.5 rounded-[8px] px-2.5 text-[10px] font-medium lg:text-[11px] ${active ? "bg-[#dfeafd] text-[#245cc7] shadow-[inset_0_0_0_1px_rgba(37,99,235,.06)]" : "text-[#687287]"}`}>
                     <Icon className="size-3.5" /> {label as string}
                   </div>
                 ))}
@@ -92,7 +92,7 @@ function DashboardMockup() {
 
               <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:grid-cols-4 lg:gap-3">
                 {summaries.map(([number, label, tone]) => (
-                  <div key={label} className="rounded-[11px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06),0_2px_7px_-5px_rgba(15,23,42,.18)] lg:p-4">
+                  <div key={label} className="dashboard-card-interactive rounded-[11px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06),0_2px_7px_-5px_rgba(15,23,42,.18)] lg:p-4">
                     <p className="tabular-nums text-lg font-semibold tracking-[-.04em] text-[#131d31] lg:text-2xl">{number}</p>
                     <div className="mt-2 flex items-center gap-1.5">
                       <span className={`size-1.5 rounded-full ${tone === "blue" ? "bg-[#5a83e8]" : tone === "amber" ? "bg-[#d9a343]" : tone === "green" ? "bg-[#56a875]" : "bg-[#d1726c]"}`} />
@@ -110,7 +110,7 @@ function DashboardMockup() {
                   </div>
                   <div className="divide-y divide-black/[.055]">
                     {deadlines.map(([title, date, detail, tone]) => (
-                      <div key={title} className="flex items-center gap-2 py-2.5 lg:gap-3 lg:py-3">
+                      <div key={title} className="dashboard-row-interactive flex items-center gap-2 py-2.5 lg:gap-3 lg:py-3">
                         <div className={`flex size-8 shrink-0 items-center justify-center rounded-[8px] ${tone === "amber" ? "bg-[#fff5df] text-[#b47a1f]" : tone === "blue" ? "bg-[#edf3ff] text-[#3e6bd1]" : "bg-[#fff0ef] text-[#b25d57]"}`}><FileText className="size-3.5" /></div>
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-[9px] font-semibold text-[#283247] lg:text-[10px]">{title}</p>
@@ -124,7 +124,7 @@ function DashboardMockup() {
                     ))}
                   </div>
                 </div>
-                <div className="rounded-[12px] bg-[#edf3ff] p-3 shadow-[inset_0_0_0_1px_rgba(37,99,235,.08)] lg:p-4">
+                <div className="dashboard-insight rounded-[12px] bg-[#edf3ff] p-3 shadow-[inset_0_0_0_1px_rgba(37,99,235,.08)] lg:p-4">
                   <div className="flex size-8 items-center justify-center rounded-[8px] bg-white text-[#4a66db] shadow-[0_0_0_1px_rgba(37,99,235,.08)]"><Sparkles className="size-4" /></div>
                   <p className="mt-3 text-[9px] font-semibold text-[#3159b7] lg:text-[10px]">PaperPilot Insight</p>
                   <p className="text-pretty mt-1.5 text-[10px] font-medium leading-4 text-[#34435f] lg:text-xs lg:leading-5">You have 3 documents requiring action this week.</p>
