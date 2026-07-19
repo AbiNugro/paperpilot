@@ -1,14 +1,11 @@
 import {
   ArrowDown,
   CalendarDays,
-  CheckCircle2,
-  Clock3,
   FileText,
   Inbox,
   LayoutDashboard,
   ListTodo,
   Sparkles,
-  WandSparkles,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/config";
@@ -39,17 +36,7 @@ function DashboardMockup() {
   const t = useTranslations("Landing.hero");
   const locale = useLocale() as Locale;
   return (
-    <div className="dashboard-enter relative mx-auto mt-14 max-w-[1100px] px-3 sm:mt-20 sm:px-8 lg:px-12">
-      <div className="label-enter label-one absolute left-4 top-[18%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:left-0">
-        <CheckCircle2 className="size-4 text-[#2f77e7]" /> {t("analyzed")}
-      </div>
-      <div className="label-enter label-two absolute right-4 top-[35%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:right-0">
-        <WandSparkles className="size-4 text-[#4f46e5]" /> {t("actionsGenerated")}
-      </div>
-      <div className="label-enter label-three absolute -bottom-4 right-[15%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex">
-        <Clock3 className="size-4 text-[#c48526]" /> {t("deadlineDetected")}
-      </div>
-
+    <div className="dashboard-enter relative mx-auto mt-12 max-w-[1100px] px-3 sm:mt-16 sm:px-8 lg:px-12">
       <div className="dashboard-shell relative overflow-hidden rounded-[18px] bg-white p-1.5 sm:rounded-[22px] sm:p-2">
         <div className="overflow-hidden rounded-[13px] bg-[#f8f9fc] sm:rounded-[15px]">
           <div className="flex h-10 items-center gap-2 border-b border-black/[.06] bg-white px-4">
@@ -88,33 +75,36 @@ function DashboardMockup() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-medium text-[#788193] lg:text-xs">{t("greeting")}</p>
-                  <h3 className="mt-1 text-base font-semibold tracking-[-.035em] text-[#10182a] sm:text-lg lg:text-2xl">{t("control")}</h3>
+                  <h3 className="text-balance mt-1 max-w-md text-base font-semibold tracking-[-.035em] text-[#10182a] sm:text-lg lg:text-2xl">{t("attentionToday")}</h3>
                 </div>
                 <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-[9px] bg-white text-[#5f6878] shadow-[0_0_0_1px_rgba(15,23,42,.07)]">
                   <span className="relative"><CalendarDays className="size-4" /><span className="absolute -right-1 -top-1 size-1.5 rounded-full bg-[#e8a83e] ring-2 ring-white" /></span>
                 </span>
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:grid-cols-4 lg:gap-3">
-                {summaries.map(([number, key, tone]) => (
-                  <div key={key} className="dashboard-card-interactive rounded-[11px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06),0_2px_7px_-5px_rgba(15,23,42,.18)] lg:p-4">
-                    <p className="tabular-nums text-lg font-semibold tracking-[-.04em] text-[#131d31] lg:text-2xl">{number}</p>
-                    <div className="mt-2 flex items-center gap-1.5">
-                      <span className={`size-1.5 rounded-full ${tone === "blue" ? "bg-[#5a83e8]" : tone === "amber" ? "bg-[#d9a343]" : tone === "green" ? "bg-[#56a875]" : "bg-[#d1726c]"}`} />
-                      <span className="text-[9px] font-medium leading-3 text-[#798192]">{t(key)}</span>
+              <div className="mt-5 rounded-[13px] bg-[#f2f5fa] p-3 shadow-[inset_0_0_0_1px_rgba(37,99,235,.1)] lg:mt-7 lg:p-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="min-w-0">
+                    <p className="text-[8px] font-semibold uppercase tracking-[.14em] text-[#657491] lg:text-[9px]">{t("highestPriority")}</p>
+                    <p className="text-pretty mt-1.5 text-[11px] font-semibold text-[#253550] lg:text-sm">{t("scholarship")}</p>
+                    <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[8px] text-[#748097] lg:text-[10px]">
+                      <span className="font-semibold text-[#9d6a1d]">{t("dueDate", {date: formatDate("2026-07-28", locale, "short")})}</span>
+                      <span>{t("missingRequirements")}</span>
+                      <span>{t("threeTasks")}</span>
                     </div>
                   </div>
-                ))}
+                  <span className="inline-flex min-h-8 shrink-0 items-center justify-center rounded-[8px] bg-[#245eea] px-3 text-[9px] font-semibold text-white shadow-[0_5px_14px_-9px_rgba(37,99,235,.7)] lg:text-[10px]">{t("continueApplication")}</span>
+                </div>
               </div>
 
               <div className="mt-3 grid gap-3 lg:mt-4 lg:grid-cols-[1.45fr_.75fr]">
                 <div className="rounded-[12px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06)] lg:p-4">
                   <div className="mb-2 flex items-center justify-between">
-                    <h4 className="text-[11px] font-semibold text-[#222c41] lg:text-xs">{t("upcoming")}</h4>
+                    <h4 className="text-[11px] font-semibold text-[#222c41] lg:text-xs">{t("nextUp")}</h4>
                     <span className="px-2 py-2 text-[9px] font-semibold text-[#3b68d0]">{t("viewAll")}</span>
                   </div>
                   <div className="divide-y divide-black/[.055]">
-                    {deadlines.map(([titleKey, date, detailKey, tone]) => (
+                    {deadlines.slice(1).map(([titleKey, date, detailKey, tone]) => (
                       <div key={titleKey} className="dashboard-row-interactive flex items-center gap-2 py-2.5 lg:gap-3 lg:py-3">
                         <div className={`flex size-8 shrink-0 items-center justify-center rounded-[8px] ${tone === "amber" ? "bg-[#fff5df] text-[#b47a1f]" : tone === "blue" ? "bg-[#edf3ff] text-[#3e6bd1]" : "bg-[#fff0ef] text-[#b25d57]"}`}><FileText className="size-3.5" /></div>
                         <div className="min-w-0 flex-1">
@@ -135,6 +125,17 @@ function DashboardMockup() {
                   <p className="text-pretty mt-1.5 text-[10px] font-medium leading-4 text-[#34435f] lg:text-xs lg:leading-5">{t("insightCopy")}</p>
                   <span className="mt-4 flex min-h-8 items-center gap-1 text-[9px] font-semibold text-[#315fca]">{t("review")} <span aria-hidden="true">→</span></span>
                 </div>
+              </div>
+              <div className="mt-3 grid grid-cols-4 gap-1.5 lg:gap-2">
+                {summaries.map(([number, key, tone]) => (
+                  <div key={key} className="dashboard-card-interactive rounded-[9px] bg-white p-2 shadow-[0_0_0_1px_rgba(15,23,42,.055)] lg:p-2.5">
+                    <p className="tabular-nums text-xs font-semibold text-[#26344c] lg:text-sm">{number}</p>
+                    <div className="mt-1 flex items-start gap-1">
+                      <span className={`mt-1 size-1 shrink-0 rounded-full ${tone === "blue" ? "bg-[#5a83e8]" : tone === "amber" ? "bg-[#d9a343]" : tone === "green" ? "bg-[#56a875]" : "bg-[#d1726c]"}`} />
+                      <span className="text-[7px] leading-3 text-[#838c9b] lg:text-[8px]">{t(key)}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

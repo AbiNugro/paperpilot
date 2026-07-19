@@ -18,22 +18,29 @@ export function LanguageSwitcher({ variant = "app" }: { variant?: "app" | "landi
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   useEffect(() => {
     if (!open) return;
     const close = (event: MouseEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     };
+    const frame = window.requestAnimationFrame(() => optionRefs.current[locales.indexOf(locale)]?.focus());
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     };
     window.addEventListener("pointerdown", close);
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       window.removeEventListener("pointerdown", close);
       window.removeEventListener("keydown", closeOnEscape);
+      window.cancelAnimationFrame(frame);
     };
-  }, [open]);
+  }, [locale, open]);
 
   const selectLocale = (nextLocale: Locale) => {
     setOpen(false);
@@ -47,6 +54,7 @@ export function LanguageSwitcher({ variant = "app" }: { variant?: "app" | "landi
   return (
     <div ref={rootRef} className="relative">
       <button
+        ref={triggerRef}
         type="button"
         aria-label={t("select")}
         aria-haspopup="menu"
@@ -62,7 +70,7 @@ export function LanguageSwitcher({ variant = "app" }: { variant?: "app" | "landi
         <div role="menu" aria-label={t("menuLabel")} className="absolute right-0 top-[calc(100%+.5rem)] z-[80] min-w-48 origin-top-right rounded-[12px] bg-white p-1.5 text-left shadow-[0_0_0_1px_rgba(15,23,42,.08),0_16px_42px_-20px_rgba(15,23,42,.35)]">
           <p className="px-2.5 py-2 text-[10px] font-semibold uppercase tracking-[.12em] text-[#8a95a6]">{t("label")}</p>
           {locales.map((item) => (
-            <button key={item} type="button" role="menuitemradio" aria-checked={item === locale} onClick={() => selectLocale(item)} className="flex min-h-10 w-full items-center justify-between gap-3 rounded-[8px] px-2.5 text-xs font-medium text-[#47556d] transition-[background-color,color] duration-150 ease-out hover:bg-[#eef3ff] hover:text-[#245cc7]">
+            <button key={item} ref={(node) => { optionRefs.current[locales.indexOf(item)] = node; }} type="button" role="menuitemradio" aria-checked={item === locale} onClick={() => selectLocale(item)} onKeyDown={(event) => { if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return; event.preventDefault(); const current = locales.indexOf(item); const next = event.key === "Home" ? 0 : event.key === "End" ? locales.length - 1 : (current + (event.key === "ArrowDown" ? 1 : -1) + locales.length) % locales.length; optionRefs.current[next]?.focus(); }} className="flex min-h-10 w-full items-center justify-between gap-3 rounded-[8px] px-2.5 text-xs font-medium text-[#47556d] transition-[background-color,color] duration-150 ease-out hover:bg-[#eef3ff] hover:text-[#245cc7]">
               <span>{languageNames[item]}</span>
               {item === locale && <Check aria-hidden="true" className="size-3.5 text-[#315fca]" />}
             </button>

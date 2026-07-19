@@ -2,11 +2,41 @@ import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ButtonLink, SectionHeading } from "./shared";
 
-type Plan = {name: string; price: string; cadence: string; description: string; features: string[]; cta: string};
+type Plan = {
+  name: string;
+  price: string;
+  cadence: string;
+  description: string;
+  features: string[];
+  cta: string;
+};
 
 export function Pricing() {
   const t = useTranslations("Landing.pricing");
   const translatedPlans = t.raw("plans") as Plan[];
-  const plans = translatedPlans.map((plan, index) => ({...plan, href: index === 2 ? "mailto:hello@paperpilot.ai" : "/dashboard", popular: index === 1}));
-  return <section id="pricing" className="py-16 sm:py-20"><div className="mx-auto max-w-[1180px] px-5"><SectionHeading eyebrow={t("eyebrow")} title={t("title")} copy={t("copy")} /><div className="motion-stagger mt-14 grid items-stretch gap-4 lg:grid-cols-3">{plans.map((plan) => <article key={plan.name} data-reveal className={`reveal-on-scroll reveal-scale relative flex flex-col rounded-[18px] p-6 sm:p-8 ${plan.popular ? "bg-[#101b36] text-white shadow-[0_0_0_1px_rgba(15,23,42,.1),0_25px_65px_-28px_rgba(30,64,175,.5)] lg:-translate-y-3" : "surface bg-white text-[#111a2e]"}`}>{plan.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#3c70ed] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.1em] text-white shadow-[0_5px_14px_-7px_rgba(37,99,235,.8)]">{t("popular")}</span>}<div><h3 className={`text-base font-semibold ${plan.popular ? "text-white" : "text-[#293449]"}`}>{plan.name}</h3><div className="mt-5 flex min-h-12 items-end gap-2"><span className="text-4xl font-semibold tracking-[-.05em]">{plan.price}</span><span className={`pb-1 text-xs ${plan.popular ? "text-[#aeb9ce]" : "text-[#7f8795]"}`}>{plan.cadence}</span></div><p className={`text-pretty mt-4 min-h-12 text-sm leading-6 ${plan.popular ? "text-[#aeb9ce]" : "text-[#687181]"}`}>{plan.description}</p></div><div className={`my-6 h-px ${plan.popular ? "bg-white/10" : "bg-black/[.07]"}`} /><ul className="flex-1 space-y-3.5">{plan.features.map((feature) => <li key={feature} className={`flex items-start gap-3 text-sm ${plan.popular ? "text-[#d1d8e5]" : "text-[#515b6c]"}`}><span className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full ${plan.popular ? "bg-[#294477] text-[#a9c2ff]" : "bg-[#eaf4ee] text-[#44845d]"}`}><Check aria-hidden="true" className="size-3" /></span>{feature}</li>)}</ul><ButtonLink href={plan.href} variant={plan.popular ? "light" : "secondary"} className="mt-8 w-full">{plan.cta}</ButtonLink></article>)}</div><p className="mt-7 text-center text-xs text-[#8a919d]">{t("disclaimer")}</p></div></section>;
+  const plans = translatedPlans.map((plan, index) => ({
+    ...plan,
+    href: index === 2 ? "mailto:hello@paperpilot.ai" : "/dashboard",
+    popular: index === 1,
+  }));
+
+  return <section id="pricing" className="py-16 sm:py-20">
+    <div className="mx-auto max-w-[1180px] px-5">
+      <SectionHeading eyebrow={t("eyebrow")} title={t("title")} copy={t("copy")} />
+      <div className="motion-stagger mt-12 grid items-stretch gap-4 sm:mt-14 lg:grid-cols-3">
+        {plans.map((plan) => <article key={plan.name} data-reveal className={`reveal-on-scroll reveal-scale relative flex flex-col rounded-[18px] p-6 sm:p-8 ${plan.popular ? "bg-[#101b36] text-white shadow-[0_0_0_1px_rgba(15,23,42,.1),0_25px_65px_-28px_rgba(30,64,175,.5)] lg:-translate-y-3" : "surface bg-white text-[#111a2e]"}`}>
+          {plan.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#3c70ed] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.1em] text-white shadow-[0_5px_14px_-7px_rgba(37,99,235,.8)]">{t("popular")}</span>}
+          <div>
+            <h3 className={`text-base font-semibold ${plan.popular ? "text-white" : "text-[#293449]"}`}>{plan.name}</h3>
+            <div className="mt-5 flex min-h-12 items-end gap-2"><span className="text-4xl font-semibold tracking-[-.05em]">{plan.price}</span><span className={`pb-1 text-xs ${plan.popular ? "text-[#aeb9ce]" : "text-[#7f8795]"}`}>{plan.cadence}</span></div>
+            <p className={`text-pretty mt-4 min-h-12 text-sm leading-6 ${plan.popular ? "text-[#aeb9ce]" : "text-[#687181]"}`}>{plan.description}</p>
+          </div>
+          <div className={`my-6 h-px ${plan.popular ? "bg-white/10" : "bg-black/[.07]"}`} />
+          <ul className="flex-1 space-y-3.5">{plan.features.map((feature) => <li key={feature} className={`flex items-start gap-3 text-sm ${plan.popular ? "text-[#d1d8e5]" : "text-[#515b6c]"}`}><span className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full ${plan.popular ? "bg-[#294477] text-[#a9c2ff]" : "bg-[#eaf4ee] text-[#44845d]"}`}><Check aria-hidden="true" className="size-3" /></span>{feature}</li>)}</ul>
+          <ButtonLink href={plan.href} variant={plan.popular ? "light" : "secondary"} className="mt-8 w-full">{plan.cta}</ButtonLink>
+        </article>)}
+      </div>
+      <p className="mt-7 text-center text-xs text-[#8a919d]">{t("disclaimer")}</p>
+    </div>
+  </section>;
 }

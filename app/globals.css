@@ -88,6 +88,7 @@ summary:focus-visible {
 
 .testimonial-marquee {
   overflow: hidden;
+  padding-block: 1rem;
   mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
 }
 
@@ -113,17 +114,22 @@ html[data-motion-ready] .testimonial-marquee[data-revealed="true"] .testimonial-
   padding-right: 1.25rem;
 }
 
-.testimonial-marquee + .mt-14 { display: none; }
+.testimonial-fallback { display: none; }
 
 @keyframes testimonial-marquee {
   to { transform: translate3d(-50%, 0, 0); }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .testimonial-marquee:hover .testimonial-track { animation-play-state: paused; }
+  .testimonial-marquee:hover .testimonial-track,
+  html[data-motion-ready] .testimonial-marquee[data-revealed="true"]:hover .testimonial-track {
+    animation-play-state: paused;
+  }
+
   .testimonial-marquee .testimonial-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 0 1px rgba(37, 99, 235, .12), 0 18px 42px -22px rgba(37, 99, 235, .25);
+    z-index: 2;
+    transform: translateY(-8px) scale(1.025);
+    box-shadow: 0 0 0 1px rgba(37, 99, 235, .12), 0 24px 48px -22px rgba(37, 99, 235, .32);
   }
 }
 
@@ -216,12 +222,6 @@ html[data-motion-ready] [data-revealed="true"] .copilot-priorities > *:nth-child
   .dashboard-insight:hover { background-color: #e7f0ff; }
 }
 
-.label-enter {
-  opacity: 0;
-  transform: translateY(8px) scale(.96);
-  animation: label-enter 500ms var(--ease-premium) forwards;
-}
-
 .label-float { animation: label-float 5s ease-in-out 1.5s infinite; }
 .label-float-delayed { animation: label-float-delayed 5.8s ease-in-out 2.1s infinite; }
 
@@ -270,10 +270,6 @@ html[data-motion-ready] [data-revealed="true"] .checklist-item:nth-child(5) { an
 @keyframes nav-enter {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes label-enter {
-  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes preview-item-enter {
@@ -346,10 +342,6 @@ html[data-motion-ready] [data-revealed="true"] .checklist-item:nth-child(5) { an
   animation: dashboard-enter 800ms 340ms var(--ease-out) forwards;
 }
 
-.label-one { animation-delay: 850ms; }
-.label-two { animation-delay: 970ms; }
-.label-three { animation-delay: 1090ms; }
-
 @keyframes hero-enter {
   to { opacity: 1; filter: blur(0); transform: translateY(0); }
 }
@@ -386,8 +378,7 @@ html[data-motion-ready] [data-revealed="true"] .checklist-item:nth-child(5) { an
   .hero-enter,
   .dashboard-enter,
   .reveal-on-scroll,
-  .app-page-enter,
-  .label-enter { opacity: 1; filter: none; transform: none; }
+  .app-page-enter { opacity: 1; filter: none; transform: none; }
 
   .testimonial-marquee {
     overflow-x: auto;

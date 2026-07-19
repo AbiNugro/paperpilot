@@ -1,13 +1,10 @@
 import type { Locale } from "@/i18n/config";
-import { mockToday, type PaperDocument, type PaperTask } from "@/lib/mock-data";
+import { getDaysRemaining, isoToDate, MOCK_TODAY } from "@/lib/date-utils";
+import type { PaperDocument, PaperTask } from "@/lib/mock-data";
 
 export type Translate = (key: string, values?: Record<string, string | number | Date>) => string;
 
 const localeTag: Record<Locale, string> = { en: "en-US", id: "id-ID" };
-
-export function isoToDate(value: string) {
-  return new Date(`${value}T12:00:00Z`);
-}
 
 export function formatDate(value: string, locale: Locale, style: "long" | "short" = "long") {
   return new Intl.DateTimeFormat(localeTag[locale], style === "long"
@@ -21,7 +18,7 @@ export function formatWeekdayDate(value: string, locale: Locale) {
 }
 
 export function formatRelativeDate(value: string, locale: Locale) {
-  const difference = Math.round((isoToDate(value).getTime() - isoToDate(mockToday).getTime()) / 86400000);
+  const difference = getDaysRemaining(value, MOCK_TODAY) ?? 0;
   return new Intl.RelativeTimeFormat(localeTag[locale], { numeric: "auto" }).format(difference, "day");
 }
 

@@ -1,3 +1,5 @@
+import { getDaysRemaining, isWithinNextDays, MOCK_TODAY } from "@/lib/date-utils";
+
 export type DocumentStatus =
   | "action_required"
   | "needs_attention"
@@ -156,18 +158,13 @@ export const documents: PaperDocument[] = [
   {id: "medical-registration-form", urgency: "low", status: "completed", uploadedAt: "2026-07-01", updatedAt: "2026-07-01", fileName: "medical-form.jpg", fileSize: "890 KB", requiredDocuments: [], tasks: []},
 ];
 
-export const mockToday = "2026-07-19";
+export const mockToday = MOCK_TODAY;
 export const primaryDocument = documents[0];
 export const allTasks = documents.flatMap((document) => document.tasks);
 export const openTasks = allTasks.filter((item) => item.status === "open");
-export const upcomingDeadlineDocuments = documents.filter((document) => document.deadline).slice(0, 3);
-
-export const getDaysRemaining = (deadline?: string) => {
-  if (!deadline) return null;
-  const end = new Date(`${deadline}T12:00:00Z`);
-  const start = new Date(`${mockToday}T12:00:00Z`);
-  return Math.max(0, Math.round((end.getTime() - start.getTime()) / 86400000));
-};
+export const upcomingDeadlineDocuments = documents
+  .filter((document) => (getDaysRemaining(document.deadline) ?? -1) >= 0)
+  .sort((a, b) => (a.deadline ?? "").localeCompare(b.deadline ?? ""));
 
 export const getTaskStats = (document: PaperDocument) => {
   const completed = document.tasks.filter((item) => item.status === "completed").length;
@@ -183,6 +180,7 @@ export const getDocument = (id: string) => documents.find((document) => document
 
 export const isDueSoon = (taskItem: PaperTask) => {
   if (!taskItem.dueDate || taskItem.status !== "open") return false;
-  const days = getDaysRemaining(taskItem.dueDate);
-  return days !== null && days <= 9;
+  return isWithinNextDays(taskItem.dueDate, 7);
 };
+
+export { getDaysRemaining } from "@/lib/date-utils";

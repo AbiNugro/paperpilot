@@ -64,7 +64,6 @@ export function ProblemSolution() {
   const beforeItems = t.raw("beforeTypes") as string[];
   const problems = t.raw("problems") as string[];
   const afterItems = t.raw("after") as string[];
-  const questions = t.raw("questions") as string[];
   return (
     <section id="product" className="py-16 sm:py-20">
       <div className="mx-auto max-w-[1180px] px-5">
@@ -75,7 +74,7 @@ export function ProblemSolution() {
           className="max-w-4xl"
         />
 
-        <div className="mt-14 grid items-stretch gap-4 lg:grid-cols-[1fr_72px_1fr] lg:gap-0">
+        <div className="mt-12 grid items-stretch gap-4 sm:mt-14 lg:grid-cols-[1fr_72px_1fr] lg:gap-0">
           <div data-reveal className="reveal-on-scroll reveal-from-left rounded-[18px] bg-[#f1f2f4] p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,.055)] sm:p-7 lg:rounded-r-none">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-[#5f6673]">{t("before")}</p>
@@ -118,11 +117,6 @@ export function ProblemSolution() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-4 border-y border-black/[.07] py-8 sm:grid-cols-2 lg:grid-cols-4">
-          {questions.map((question, index) => (
-            <p key={question} className="text-balance flex gap-3 text-sm font-semibold leading-6 text-[#4f5868]"><span className="tabular-nums text-[#3f6dd5]">0{index + 1}</span>{question}</p>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -188,7 +182,7 @@ export function HowItWorks() {
     <section id="how-it-works" className="bg-[#f4f6fa] pb-12 pt-16 sm:pb-12 sm:pt-20">
       <div className="mx-auto max-w-[1180px] px-5">
         <SectionHeading title={t("title")} copy={t("copy")} />
-        <div className="mt-16 grid items-stretch gap-12 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-12 grid items-stretch gap-10 sm:mt-14 lg:grid-cols-3 lg:gap-7">
           {steps.map((step, index) => (
             <article key={step.number} data-reveal className="reveal-on-scroll flex flex-col" style={{ transitionDelay: `${index * 110}ms` }}>
               <div className="mb-6 flex items-center gap-4">
@@ -197,7 +191,7 @@ export function HowItWorks() {
               </div>
               <h3 className="text-balance text-2xl font-semibold tracking-[-.04em] text-[#111a2e]">{step.title}</h3>
               <p className="text-pretty mt-3 min-h-12 text-sm leading-6 text-[#687181]">{step.copy}</p>
-              <div data-reveal className={`step-visual reveal-on-scroll mt-7 flex-1 lg:flex lg:min-h-[375px] ${step.number === "02" ? "reveal-from-left" : "reveal-from-right"}`} style={{ transitionDelay: `${index * 110 + 100}ms` }}>{step.visual}</div>
+              <div data-reveal className={`step-visual reveal-on-scroll mt-7 flex-1 lg:flex lg:h-[300px] lg:flex-none ${step.number === "02" ? "reveal-from-left" : "reveal-from-right"}`} style={{ transitionDelay: `${index * 110 + 100}ms` }}>{step.visual}</div>
             </article>
           ))}
         </div>
@@ -213,11 +207,11 @@ export function DocumentAnalysis() {
   const actions = t.raw("actionItems") as string[];
   return (
     <section id="features" className="bg-[#f4f6fa] pb-16 pt-12 sm:pb-20 sm:pt-12">
-      <div className="mx-auto grid max-w-[1180px] items-center gap-14 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+      <div className="mx-auto grid max-w-[1180px] items-center gap-10 px-5 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[.18em] text-[#3b67cf]">{t("eyebrow")}</p>
-          <h2 className="text-balance mt-5 text-[clamp(2.2rem,4.5vw,4.15rem)] font-semibold leading-[1.02] tracking-[-.055em]">{t("title")}</h2>
-          <p className="text-pretty mt-6 max-w-xl text-base leading-7 text-[#646d7d]">{t("copy")}</p>
+          <h2 className="text-balance mt-4 text-[clamp(2.2rem,4.5vw,4.15rem)] font-semibold leading-[1.02] tracking-[-.055em]">{t("title")}</h2>
+          <p className="text-pretty mt-5 max-w-xl text-base leading-7 text-[#646d7d]">{t("copy")}</p>
           <ArrowLink href="/dashboard">{t("cta")}</ArrowLink>
         </div>
         <div data-reveal className="reveal-on-scroll reveal-from-right dashboard-shell rounded-[20px] bg-white p-2">
@@ -245,7 +239,7 @@ export function DocumentToActions() {
   return (
     <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-[1180px] px-5">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 lg:order-1">
             <div data-reveal className="reveal-on-scroll reveal-from-left surface rounded-[20px] bg-white p-4 sm:p-6">
               <div className="flex items-center gap-3 rounded-[12px] bg-[#f6f8fb] p-4 shadow-[inset_0_0_0_1px_rgba(15,23,42,.05)]"><span className="flex size-10 items-center justify-center rounded-[9px] bg-white text-[#456bc9] shadow-[0_0_0_1px_rgba(15,23,42,.06)]"><FileText className="size-5" /></span><div className="min-w-0"><p className="truncate text-xs font-semibold text-[#354054]">{t("file")}</p><p className="mt-1 text-[9px] text-[#8c94a1]">{t("uploaded")}</p></div></div>
@@ -258,8 +252,8 @@ export function DocumentToActions() {
           </div>
           <div className="order-1 lg:order-2">
             <p className="text-xs font-semibold uppercase tracking-[.18em] text-[#3b67cf]">{t("eyebrow")}</p>
-            <h2 className="text-balance mt-5 text-[clamp(2.2rem,4.5vw,4.15rem)] font-semibold leading-[1.02] tracking-[-.055em]">{t("title")}</h2>
-            <p className="text-pretty mt-6 max-w-xl text-base leading-7 text-[#646d7d]">{t("copy")}</p>
+            <h2 className="text-balance mt-4 text-[clamp(2.2rem,4.5vw,4.15rem)] font-semibold leading-[1.02] tracking-[-.055em]">{t("title")}</h2>
+            <p className="text-pretty mt-5 max-w-xl text-base leading-7 text-[#646d7d]">{t("copy")}</p>
           </div>
         </div>
       </div>
@@ -273,11 +267,11 @@ export function DeadlineSpotlight() {
   const deadlines = translated.map((item, index) => ({...item, tone: (["red", "amber", "blue"] as const)[index]}));
   return (
     <section className="bg-[#101a34] py-16 text-white sm:py-20">
-      <div className="mx-auto grid max-w-[1180px] items-center gap-14 px-5 lg:grid-cols-[.9fr_1.1fr] lg:gap-20">
+      <div className="mx-auto grid max-w-[1180px] items-center gap-10 px-5 lg:grid-cols-[.9fr_1.1fr] lg:gap-16">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[.18em] text-[#91aff9]">{t("eyebrow")}</p>
-          <h2 className="text-balance mt-5 text-[clamp(2.2rem,4.5vw,4.1rem)] font-semibold leading-[1.03] tracking-[-.055em]">{t("title")}</h2>
-          <p className="text-pretty mt-6 max-w-xl text-base leading-7 text-[#aeb8cd]">{t("copy")}</p>
+          <h2 className="text-balance mt-4 text-[clamp(2.2rem,4.5vw,4.1rem)] font-semibold leading-[1.03] tracking-[-.055em]">{t("title")}</h2>
+          <p className="text-pretty mt-5 max-w-xl text-base leading-7 text-[#aeb8cd]">{t("copy")}</p>
         </div>
         <div className="rounded-[20px] bg-white/[.055] p-2 shadow-[inset_0_0_0_1px_rgba(255,255,255,.1),0_28px_70px_-30px_rgba(0,0,0,.65)]">
           <div className="rounded-[14px] bg-[#f8f9fc] p-5 text-[#111a2e] sm:p-7">
@@ -298,7 +292,7 @@ export function AiCopilot() {
     <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-[1180px] px-5">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} copy={t("copy")} />
-        <div data-reveal className="reveal-on-scroll reveal-scale dashboard-shell mx-auto mt-14 max-w-4xl rounded-[20px] bg-white p-2">
+        <div data-reveal className="reveal-on-scroll reveal-scale dashboard-shell mx-auto mt-12 max-w-4xl rounded-[20px] bg-white p-2 sm:mt-14">
           <div className="overflow-hidden rounded-[14px] bg-[#f7f9fc]">
             <div className="flex items-center justify-between border-b border-black/[.06] bg-white px-4 py-3 sm:px-5"><div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-[9px] bg-[#eaf1ff] text-[#426bd1]"><Sparkles className="size-4" /></span><div><p className="text-xs font-semibold text-[#2e394d]">PaperPilot Copilot</p><p className="text-[9px] text-[#87909d]">{t("connected")}</p></div></div><StatusPill tone="green">{t("ready")}</StatusPill></div>
             <div className="copilot-sequence mx-auto max-w-2xl space-y-5 p-4 sm:p-8">
@@ -328,12 +322,12 @@ export function UseCases() {
     <section id="use-cases" className="bg-[#f4f6fa] py-16 sm:py-20">
       <div className="mx-auto max-w-[1180px] px-5">
         <SectionHeading title={t("title")} />
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
           {groups.map(({ title, items }, index) => { const {icon: Icon, tone} = useCaseMeta[index]; return (
             <article key={title} data-reveal className="reveal-on-scroll reveal-scale surface-interactive rounded-[17px] bg-white p-6">
               <span className={`flex size-10 items-center justify-center rounded-[10px] ${tone}`}><Icon className="size-5" /></span>
-              <h3 className="mt-6 text-lg font-semibold tracking-[-.03em] text-[#202b40]">{title}</h3>
-              <div className="mt-5 space-y-3">{items.map(item => <p key={item} className="flex items-center gap-2 text-sm text-[#687181]"><ChevronRight className="size-3.5 text-[#7591d7]" />{item}</p>)}</div>
+              <h3 className="mt-5 text-lg font-semibold tracking-[-.03em] text-[#202b40]">{title}</h3>
+              <div className="mt-4 space-y-3">{items.map(item => <p key={item} className="flex items-center gap-2 text-sm text-[#687181]"><ChevronRight className="size-3.5 text-[#7591d7]" />{item}</p>)}</div>
             </article>
           ); })}
         </div>
@@ -367,7 +361,7 @@ export function Security() {
     <section className="pb-16 sm:pb-20">
       <div className="mx-auto max-w-[1180px] px-5">
         <div className="overflow-hidden rounded-[22px] bg-[#111c36] px-5 py-14 text-white sm:px-10 sm:py-16 lg:px-16">
-          <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-20">
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-16">
             <div><div className="flex size-11 items-center justify-center rounded-[11px] bg-white/10 text-[#9eb9ff]"><ShieldCheck className="size-5" /></div><h2 className="text-balance mt-6 text-[clamp(2.2rem,4vw,3.7rem)] font-semibold leading-[1.04] tracking-[-.05em]">{t("title")}</h2><p className="text-pretty mt-5 text-sm leading-6 text-[#acb7cc] sm:text-base sm:leading-7">{t("copy")}</p></div>
             <div className="motion-stagger grid gap-3 sm:grid-cols-2">{items.map(({title, copy}, index) => { const Icon = securityIcons[index]; return <div key={title} data-reveal className="reveal-on-scroll reveal-scale rounded-[13px] bg-white/[.065] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,.08)]"><Icon className="size-4.5 text-[#93aff4]" /><h3 className="mt-4 text-sm font-semibold text-white">{title}</h3><p className="text-pretty mt-2 text-xs leading-5 text-[#aeb8ca]">{copy}</p></div>; })}</div>
           </div>
@@ -387,11 +381,11 @@ function TestimonialCard({
 }: Testimonial) {
   const t = useTranslations("Landing.testimonials");
   return (
-    <figure className="testimonial-card surface-interactive flex min-h-[270px] w-[min(82vw,360px)] shrink-0 flex-col rounded-[17px] bg-white p-7 sm:w-[min(46vw,360px)] sm:p-8 lg:w-[min(30vw,360px)]">
+    <figure className="testimonial-card surface-interactive relative flex min-h-[220px] w-[min(74vw,290px)] shrink-0 flex-col rounded-[15px] bg-white p-5 sm:min-h-[270px] sm:w-[min(46vw,360px)] sm:rounded-[17px] sm:p-8 lg:w-[min(30vw,360px)]">
       <MessageSquareText className="size-5 text-[#5579d5]" />
-      <blockquote className="text-pretty mt-6 flex-1 text-sm font-medium leading-6 tracking-[-.01em] text-[#313c50] sm:text-[15px] sm:leading-6">&ldquo;{quote}&rdquo;</blockquote>
-      <figcaption className="mt-8 flex items-center gap-3 border-t border-black/[.06] pt-6">
-        <span className="flex size-9 items-center justify-center rounded-full bg-[#eaf1ff] text-[10px] font-semibold text-[#3b63bf]">{initials}</span>
+      <blockquote className="text-pretty mt-4 flex-1 text-[13px] font-medium leading-5 tracking-[-.01em] text-[#313c50] sm:mt-6 sm:text-[15px] sm:leading-6">&ldquo;{quote}&rdquo;</blockquote>
+      <figcaption className="mt-6 flex items-center gap-3 border-t border-black/[.06] pt-5 sm:mt-8 sm:pt-6">
+        <span className="flex size-8 items-center justify-center rounded-full bg-[#eaf1ff] text-[9px] font-semibold text-[#3b63bf] sm:size-9 sm:text-[10px]">{initials}</span>
         <span>
           <span className="block text-xs font-semibold text-[#303a4c]">{name}</span>
           <span className="mt-0.5 block text-[10px] text-[#848c98]">{role} · {t("persona")}</span>
@@ -408,7 +402,7 @@ export function Testimonials() {
     <section className="bg-[#f4f6fa] py-16 sm:py-20">
       <div className="mx-auto max-w-[1180px] px-5">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} copy={t("copy")} />
-        <div data-reveal role="region" aria-label={t("label")} className="testimonial-marquee reveal-on-scroll mt-14">
+        <div data-reveal role="region" aria-label={t("label")} className="testimonial-marquee reveal-on-scroll mt-12 sm:mt-14">
           <div className="testimonial-track">
             <div className="testimonial-group">
               {testimonials.map((testimonial) => <TestimonialCard key={testimonial.name} {...testimonial} />)}
@@ -418,7 +412,7 @@ export function Testimonials() {
             </div>
           </div>
         </div>
-        <div className="mt-14 grid gap-4 lg:grid-cols-3">{testimonials.map(({ quote, name, role, initials }) => <figure key={name} className="surface-interactive flex min-h-[270px] flex-col rounded-[17px] bg-white p-6 sm:p-7"><MessageSquareText className="size-5 text-[#5579d5]" /><blockquote className="text-pretty mt-6 flex-1 text-base font-medium leading-7 tracking-[-.015em] text-[#313c50]">“{quote}”</blockquote><figcaption className="mt-7 flex items-center gap-3 border-t border-black/[.06] pt-5"><span className="flex size-9 items-center justify-center rounded-full bg-[#eaf1ff] text-[10px] font-semibold text-[#3b63bf]">{initials}</span><span><span className="block text-xs font-semibold text-[#303a4c]">{name}</span><span className="mt-0.5 block text-[10px] text-[#848c98]">{role} · {t("persona")}</span></span></figcaption></figure>)}</div>
+        <div className="testimonial-fallback mt-14 grid gap-4 lg:grid-cols-3">{testimonials.map(({ quote, name, role, initials }) => <figure key={name} className="surface-interactive flex min-h-[270px] flex-col rounded-[17px] bg-white p-6 sm:p-7"><MessageSquareText className="size-5 text-[#5579d5]" /><blockquote className="text-pretty mt-6 flex-1 text-base font-medium leading-7 tracking-[-.015em] text-[#313c50]">“{quote}”</blockquote><figcaption className="mt-7 flex items-center gap-3 border-t border-black/[.06] pt-5"><span className="flex size-9 items-center justify-center rounded-full bg-[#eaf1ff] text-[10px] font-semibold text-[#3b63bf]">{initials}</span><span><span className="block text-xs font-semibold text-[#303a4c]">{name}</span><span className="mt-0.5 block text-[10px] text-[#848c98]">{role} · {t("persona")}</span></span></figcaption></figure>)}</div>
       </div>
     </section>
   );

@@ -86,8 +86,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-[#f7f8fb] text-[#17233b]">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[248px] border-r border-[#dce4f0] bg-[#edf3fb] lg:block"><SidebarContent /></aside>
 
-      {drawerOpen && <button type="button" aria-label={t("closeOverlay")} onClick={() => setDrawerOpen(false)} className="fixed inset-0 z-40 bg-[#13213d]/25 backdrop-blur-[2px] lg:hidden" />}
-      <aside aria-label={t("mobileNavigation")} aria-hidden={!drawerOpen} className={`fixed inset-y-0 left-0 z-50 w-[min(86vw,320px)] border-r border-[#dce4f0] bg-[#edf3fb] shadow-[16px_0_50px_-28px_rgba(15,23,42,.5)] transition-[transform,visibility] duration-200 [transition-timing-function:var(--ease-out)] lg:hidden ${drawerOpen ? "translate-x-0" : "invisible -translate-x-full"}`}>
+      {drawerOpen && <button type="button" tabIndex={-1} aria-label={t("closeOverlay")} onClick={() => setDrawerOpen(false)} className="fixed inset-0 z-40 bg-[#13213d]/25 backdrop-blur-[2px] lg:hidden" />}
+      <aside role="dialog" aria-modal={drawerOpen || undefined} aria-label={t("mobileNavigation")} aria-hidden={!drawerOpen} inert={!drawerOpen} className={`fixed inset-y-0 left-0 z-50 w-[min(86vw,320px)] border-r border-[#dce4f0] bg-[#edf3fb] shadow-[16px_0_50px_-28px_rgba(15,23,42,.5)] transition-[transform,visibility] duration-200 [transition-timing-function:var(--ease-out)] lg:hidden ${drawerOpen ? "translate-x-0" : "invisible -translate-x-full"}`}>
         <div ref={(node) => { const button = node?.querySelector("button") as HTMLButtonElement | null; if (button) closeButtonRef.current = button; }} className="h-full"><SidebarContent close={() => setDrawerOpen(false)} /></div>
       </aside>
 
