@@ -319,6 +319,15 @@ html[data-motion-ready] [data-revealed="true"] .checklist-item:nth-child(5) { an
   background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.09), transparent);
 }
 
+.app-page-enter {
+  animation: app-page-enter 240ms var(--ease-premium) both;
+}
+
+@keyframes app-page-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .hero-enter {
   opacity: 0;
   filter: blur(4px);
@@ -377,6 +386,7 @@ html[data-motion-ready] [data-revealed="true"] .checklist-item:nth-child(5) { an
   .hero-enter,
   .dashboard-enter,
   .reveal-on-scroll,
+  .app-page-enter,
   .label-enter { opacity: 1; filter: none; transform: none; }
 
   .testimonial-marquee {
