@@ -9,13 +9,13 @@ import { Brand } from "@/components/landing/shared";
 const primaryNav = [
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
   { label: "Paper Inbox", href: "/inbox", icon: Inbox },
-  { label: "Tasks", href: "/dashboard#tasks", icon: CheckSquare },
-  { label: "Deadlines", href: "/dashboard#deadlines", icon: CalendarClock },
+  { label: "Tasks", href: "/tasks", icon: CheckSquare },
+  { label: "Deadlines", href: "/deadlines", icon: CalendarClock },
 ];
 
 function SidebarContent({ close }: { close?: () => void }) {
   const pathname = usePathname();
-  const isActive = (href: string) => href === "/dashboard" ? pathname === "/dashboard" : href.startsWith("/dashboard") ? pathname === "/dashboard" : pathname.startsWith(href);
+  const isActive = (href: string) => href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href);
 
   return (
     <div className="flex h-full flex-col px-3 py-4">
@@ -38,16 +38,18 @@ function SidebarContent({ close }: { close?: () => void }) {
         </div>
       </nav>
 
+      <Link href="/upload" onClick={close} className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] bg-[#245eea] px-3 text-sm font-semibold text-white shadow-[0_6px_16px_-9px_rgba(37,99,235,.68)] transition-[background-color,transform] duration-150 ease-out hover:bg-[#1e53dc] hover:-translate-y-px active:scale-[0.96]"><span aria-hidden="true" className="text-lg leading-none">+</span>Upload document</Link>
+
       <div className="mt-8 border-t border-[#dce4f0] pt-7">
         <p className="px-3 text-[10px] font-semibold uppercase tracking-[.16em] text-[#8994a8]">Assistant</p>
-        <button type="button" onClick={() => window.dispatchEvent(new CustomEvent("paperpilot:open-copilot"))} className="app-nav-item mt-3 flex min-h-11 w-full items-center gap-3 rounded-[10px] px-3 text-left text-sm font-medium text-[#5f6b80] transition-[background-color,color,transform] duration-150 ease-out hover:bg-[#e8eef8] hover:text-[#263b68]">
+        <Link href="/copilot" onClick={close} className={`app-nav-item mt-3 flex min-h-11 w-full items-center gap-3 rounded-[10px] px-3 text-left text-sm font-medium text-[#5f6b80] transition-[background-color,color,transform] duration-150 ease-out hover:bg-[#e8eef8] hover:text-[#263b68] ${pathname.startsWith("/copilot") ? "bg-[#dfeafd] text-[#245cc7]" : ""}`}>
           <Bot aria-hidden="true" className="size-[17px]" />
           <span>AI Copilot</span>
-        </button>
+        </Link>
       </div>
 
       <div className="mt-auto space-y-2 border-t border-[#dce4f0] pt-4">
-        <button type="button" className="flex min-h-11 w-full items-center gap-3 rounded-[10px] px-3 text-left text-sm text-[#5f6b80] transition-[background-color,color] duration-150 ease-out hover:bg-[#e8eef8] hover:text-[#263b68]"><Settings aria-hidden="true" className="size-[17px]" /><span>Settings</span></button>
+        <Link href="/settings" onClick={close} className={`flex min-h-11 w-full items-center gap-3 rounded-[10px] px-3 text-left text-sm transition-[background-color,color] duration-150 ease-out hover:bg-[#e8eef8] hover:text-[#263b68] ${pathname.startsWith("/settings") ? "bg-[#dfeafd] font-semibold text-[#245cc7]" : "text-[#5f6b80]"}`}><Settings aria-hidden="true" className="size-[17px]" /><span>Settings</span></Link>
         <div className="flex items-center gap-3 rounded-[11px] bg-white/70 p-2.5 shadow-[inset_0_0_0_1px_rgba(37,99,235,.07)]">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#dce8ff] text-[10px] font-semibold text-[#315fca]">AN</span>
           <span className="min-w-0"><span className="block truncate text-xs font-semibold text-[#293750]">Alex Morgan</span><span className="mt-0.5 block text-[10px] text-[#8792a5]">Free plan</span></span>

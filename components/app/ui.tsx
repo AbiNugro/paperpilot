@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check, Clock3, FileText, AlertCircle, Circle } from "lucide-react";
-import type { DocumentStatus, PaperDocument } from "@/lib/mock-data";
+import { getTaskStats, type DocumentStatus, type PaperDocument } from "@/lib/mock-data";
 
 export const statusLabels: Record<DocumentStatus, string> = {
   action_required: "Action Required",
@@ -41,7 +41,13 @@ export function DocumentIcon({ type }: { type: string }) {
 }
 
 export function DocumentRow({ document }: { document: PaperDocument }) {
-  return <Link href={`/documents/${document.id}`} className="group flex min-w-0 flex-col gap-3 rounded-[12px] bg-white p-4 shadow-[0_0_0_1px_rgba(15,23,42,.065)] transition-[transform,box-shadow,background-color] duration-180 ease-out hover:-translate-y-px hover:bg-[#fcfdff] hover:shadow-[0_0_0_1px_rgba(37,99,235,.14),0_8px_22px_-18px_rgba(37,99,235,.35)] sm:grid sm:grid-cols-[minmax(0,1.8fr)_minmax(80px,.7fr)_minmax(90px,.8fr)_auto] sm:items-center sm:gap-4"><div className="flex min-w-0 items-center gap-3"><DocumentIcon type={document.type} /><span className="min-w-0"><span className="block truncate text-sm font-semibold text-[#2c3a55] group-hover:text-[#245eea]">{document.title}</span><span className="mt-1 block truncate text-[11px] text-[#8993a4]">{document.type} · Updated {document.uploadedAt}</span></span></div><span className="hidden text-xs text-[#68758a] sm:block">{document.type}</span><span className="text-xs text-[#68758a] sm:block">{document.deadlineLabel ?? "No deadline"}</span><StatusBadge status={document.status} /></Link>;
+  const stats = getTaskStats(document);
+  return <Link href={`/documents/${document.id}`} className="group flex min-w-0 flex-col gap-3 rounded-[12px] bg-white p-4 shadow-[0_0_0_1px_rgba(15,23,42,.065)] transition-[transform,box-shadow,background-color] duration-180 ease-out hover:-translate-y-px hover:bg-[#fcfdff] hover:shadow-[0_0_0_1px_rgba(37,99,235,.14),0_8px_22px_-18px_rgba(37,99,235,.35)] sm:grid sm:grid-cols-[minmax(0,1.7fr)_minmax(80px,.65fr)_minmax(110px,.8fr)_auto] sm:items-center sm:gap-4"><div className="flex min-w-0 items-center gap-3"><DocumentIcon type={document.type} /><span className="min-w-0"><span className="block truncate text-sm font-semibold text-[#2c3a55] group-hover:text-[#245eea]">{document.title}</span><span className="mt-1 block truncate text-[11px] text-[#8993a4]">{document.type} · Updated {document.updatedAt}</span></span></div><span className="hidden text-xs text-[#68758a] sm:block">{document.deadlineLabel?.replace("Due ", "—") ?? "No deadline"}</span><span className="text-xs text-[#68758a] sm:block">{stats.total ? `${stats.completed} / ${stats.total} complete` : "No tasks"}</span><StatusBadge status={document.status} /></Link>;
+}
+
+export function ProgressText({ document }: { document: PaperDocument }) {
+  const stats = getTaskStats(document);
+  return <span className="text-xs text-[#68758a]">{stats.total ? `${stats.completed} / ${stats.total} complete` : "No tasks"}</span>;
 }
 
 export function DeadlineRow({ title, due, detail, status, documentId }: { title: string; due: string; detail: string; status: DocumentStatus; documentId: string }) {
