@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AppShell } from "@/components/app/app-shell";
-import { AppPlaceholder } from "@/components/app/placeholder";
+import { SettingsPage } from "@/components/app/placeholder";
 
 export const metadata: Metadata = { title: "Settings | PaperPilot" };
-export default function SettingsRoute() { return <AppShell><AppPlaceholder kind="settings" /></AppShell>; }
+export default function SettingsRoute() { return <AppShell><SettingsPage /></AppShell>; }

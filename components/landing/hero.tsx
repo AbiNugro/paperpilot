@@ -10,39 +10,44 @@ import {
   Sparkles,
   WandSparkles,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import type { Locale } from "@/i18n/config";
+import { formatDate } from "@/lib/i18n-format";
 import { Brand, ButtonLink } from "./shared";
 
 const sidebarItems = [
-  [LayoutDashboard, "Overview", true],
-  [Inbox, "Paper Inbox", false],
-  [ListTodo, "Tasks", false],
-  [CalendarDays, "Deadlines", false],
+  [LayoutDashboard, "overview", true],
+  [Inbox, "inbox", false],
+  [ListTodo, "tasks", false],
+  [CalendarDays, "deadlines", false],
 ] as const;
 
 const summaries = [
-  ["12", "Documents", "blue"],
-  ["3", "Upcoming deadlines", "amber"],
-  ["7", "Open tasks", "green"],
-  ["2", "Need attention", "red"],
+  ["12", "documents", "blue"],
+  ["3", "upcoming", "amber"],
+  ["7", "openTasks", "green"],
+  ["2", "needAttention", "red"],
 ] as const;
 
 const deadlines = [
-  ["Scholarship Application", "July 28", "3 tasks remaining", "amber"],
-  ["Internship Registration", "July 30", "1 task remaining", "blue"],
-  ["Internet Bill", "August 2", "Payment required", "red"],
+  ["scholarship", "2026-07-28", "threeTasks", "amber"],
+  ["internship", "2026-07-30", "oneTask", "blue"],
+  ["internet", "2026-08-02", "payment", "red"],
 ] as const;
 
 function DashboardMockup() {
+  const t = useTranslations("Landing.hero");
+  const locale = useLocale() as Locale;
   return (
     <div className="dashboard-enter relative mx-auto mt-14 max-w-[1100px] px-3 sm:mt-20 sm:px-8 lg:px-12">
       <div className="label-enter label-one absolute left-4 top-[18%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:left-0">
-        <CheckCircle2 className="size-4 text-[#2f77e7]" /> Document analyzed
+        <CheckCircle2 className="size-4 text-[#2f77e7]" /> {t("analyzed")}
       </div>
       <div className="label-enter label-two absolute right-4 top-[35%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:right-0">
-        <WandSparkles className="size-4 text-[#4f46e5]" /> 4 actions generated
+        <WandSparkles className="size-4 text-[#4f46e5]" /> {t("actionsGenerated")}
       </div>
       <div className="label-enter label-three absolute -bottom-4 right-[15%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex">
-        <Clock3 className="size-4 text-[#c48526]" /> Deadline detected
+        <Clock3 className="size-4 text-[#c48526]" /> {t("deadlineDetected")}
       </div>
 
       <div className="dashboard-shell relative overflow-hidden rounded-[18px] bg-white p-1.5 sm:rounded-[22px] sm:p-2">
@@ -60,21 +65,21 @@ function DashboardMockup() {
             <aside className="hidden border-r border-black/[.06] bg-[#f2f6fd] p-3 sm:block lg:p-4">
               <div className="mb-4 px-2"><Brand compact /></div>
               <div className="space-y-1">
-                {sidebarItems.map(([Icon, label, active]) => (
-                  <div key={label} className={`dashboard-nav-item flex h-9 items-center gap-2.5 rounded-[8px] px-2.5 text-[10px] font-medium lg:text-[11px] ${active ? "bg-[#dfeafd] text-[#245cc7] shadow-[inset_0_0_0_1px_rgba(37,99,235,.06)]" : "text-[#687287]"}`}>
-                    <Icon className="size-3.5" /> {label as string}
+                {sidebarItems.map(([Icon, key, active]) => (
+                  <div key={key} className={`dashboard-nav-item flex h-9 items-center gap-2.5 rounded-[8px] px-2.5 text-[10px] font-medium lg:text-[11px] ${active ? "bg-[#dfeafd] text-[#245cc7] shadow-[inset_0_0_0_1px_rgba(37,99,235,.06)]" : "text-[#687287]"}`}>
+                    <Icon className="size-3.5" /> {t(key)}
                   </div>
                 ))}
               </div>
               <div className="mt-5 border-t border-[#dfe5ee] pt-4">
                 <div className="flex h-9 items-center gap-2.5 rounded-[8px] px-2.5 text-[10px] font-medium text-[#687287] lg:text-[11px]">
-                  <Sparkles className="size-3.5 text-[#4d67dc]" /> AI Copilot
+                  <Sparkles className="size-3.5 text-[#4d67dc]" /> {t("copilot")}
                 </div>
               </div>
               <div className="mt-auto pt-36 lg:pt-44">
                 <div className="rounded-[10px] bg-white p-2.5 shadow-[0_0_0_1px_rgba(15,23,42,.06)]">
                   <div className="mb-2 h-1.5 w-full overflow-hidden rounded-full bg-[#e8ecf3]"><div className="h-full w-[68%] rounded-full bg-[#3f70e5]" /></div>
-                  <p className="text-[8px] font-medium text-[#778092]">3 of 5 analyses used</p>
+                  <p className="text-[8px] font-medium text-[#778092]">{t("usage")}</p>
                 </div>
               </div>
             </aside>
@@ -82,8 +87,8 @@ function DashboardMockup() {
             <div className="p-4 sm:p-5 lg:p-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-medium text-[#788193] lg:text-xs">Good morning, Alex</p>
-                  <h3 className="mt-1 text-base font-semibold tracking-[-.035em] text-[#10182a] sm:text-lg lg:text-2xl">Your paperwork, under control.</h3>
+                  <p className="text-[10px] font-medium text-[#788193] lg:text-xs">{t("greeting")}</p>
+                  <h3 className="mt-1 text-base font-semibold tracking-[-.035em] text-[#10182a] sm:text-lg lg:text-2xl">{t("control")}</h3>
                 </div>
                 <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-[9px] bg-white text-[#5f6878] shadow-[0_0_0_1px_rgba(15,23,42,.07)]">
                   <span className="relative"><CalendarDays className="size-4" /><span className="absolute -right-1 -top-1 size-1.5 rounded-full bg-[#e8a83e] ring-2 ring-white" /></span>
@@ -91,12 +96,12 @@ function DashboardMockup() {
               </div>
 
               <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:grid-cols-4 lg:gap-3">
-                {summaries.map(([number, label, tone]) => (
-                  <div key={label} className="dashboard-card-interactive rounded-[11px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06),0_2px_7px_-5px_rgba(15,23,42,.18)] lg:p-4">
+                {summaries.map(([number, key, tone]) => (
+                  <div key={key} className="dashboard-card-interactive rounded-[11px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06),0_2px_7px_-5px_rgba(15,23,42,.18)] lg:p-4">
                     <p className="tabular-nums text-lg font-semibold tracking-[-.04em] text-[#131d31] lg:text-2xl">{number}</p>
                     <div className="mt-2 flex items-center gap-1.5">
                       <span className={`size-1.5 rounded-full ${tone === "blue" ? "bg-[#5a83e8]" : tone === "amber" ? "bg-[#d9a343]" : tone === "green" ? "bg-[#56a875]" : "bg-[#d1726c]"}`} />
-                      <span className="text-[9px] font-medium leading-3 text-[#798192]">{label}</span>
+                      <span className="text-[9px] font-medium leading-3 text-[#798192]">{t(key)}</span>
                     </div>
                   </div>
                 ))}
@@ -105,20 +110,20 @@ function DashboardMockup() {
               <div className="mt-3 grid gap-3 lg:mt-4 lg:grid-cols-[1.45fr_.75fr]">
                 <div className="rounded-[12px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06)] lg:p-4">
                   <div className="mb-2 flex items-center justify-between">
-                    <h4 className="text-[11px] font-semibold text-[#222c41] lg:text-xs">Upcoming deadlines</h4>
-                    <span className="px-2 py-2 text-[9px] font-semibold text-[#3b68d0]">View all</span>
+                    <h4 className="text-[11px] font-semibold text-[#222c41] lg:text-xs">{t("upcoming")}</h4>
+                    <span className="px-2 py-2 text-[9px] font-semibold text-[#3b68d0]">{t("viewAll")}</span>
                   </div>
                   <div className="divide-y divide-black/[.055]">
-                    {deadlines.map(([title, date, detail, tone]) => (
-                      <div key={title} className="dashboard-row-interactive flex items-center gap-2 py-2.5 lg:gap-3 lg:py-3">
+                    {deadlines.map(([titleKey, date, detailKey, tone]) => (
+                      <div key={titleKey} className="dashboard-row-interactive flex items-center gap-2 py-2.5 lg:gap-3 lg:py-3">
                         <div className={`flex size-8 shrink-0 items-center justify-center rounded-[8px] ${tone === "amber" ? "bg-[#fff5df] text-[#b47a1f]" : tone === "blue" ? "bg-[#edf3ff] text-[#3e6bd1]" : "bg-[#fff0ef] text-[#b25d57]"}`}><FileText className="size-3.5" /></div>
                         <div className="min-w-0 flex-1">
-                          <p className="truncate text-[9px] font-semibold text-[#283247] lg:text-[10px]">{title}</p>
-                          <p className="mt-0.5 text-[8px] text-[#8a92a0]">{detail}</p>
+                          <p className="truncate text-[9px] font-semibold text-[#283247] lg:text-[10px]">{t(titleKey)}</p>
+                          <p className="mt-0.5 text-[8px] text-[#8a92a0]">{t(detailKey)}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-[8px] font-medium text-[#8a92a0]">Deadline</p>
-                          <p className="tabular-nums text-[9px] font-semibold text-[#3d4656] lg:text-[10px]">{date}</p>
+                          <p className="text-[8px] font-medium text-[#8a92a0]">{t("deadline")}</p>
+                          <p className="tabular-nums text-[9px] font-semibold text-[#3d4656] lg:text-[10px]">{formatDate(date, locale, "short")}</p>
                         </div>
                       </div>
                     ))}
@@ -126,9 +131,9 @@ function DashboardMockup() {
                 </div>
                 <div className="dashboard-insight rounded-[12px] bg-[#edf3ff] p-3 shadow-[inset_0_0_0_1px_rgba(37,99,235,.08)] lg:p-4">
                   <div className="flex size-8 items-center justify-center rounded-[8px] bg-white text-[#4a66db] shadow-[0_0_0_1px_rgba(37,99,235,.08)]"><Sparkles className="size-4" /></div>
-                  <p className="mt-3 text-[9px] font-semibold text-[#3159b7] lg:text-[10px]">PaperPilot Insight</p>
-                  <p className="text-pretty mt-1.5 text-[10px] font-medium leading-4 text-[#34435f] lg:text-xs lg:leading-5">You have 3 documents requiring action this week.</p>
-                  <span className="mt-4 flex min-h-8 items-center gap-1 text-[9px] font-semibold text-[#315fca]">Review actions <span aria-hidden="true">→</span></span>
+                  <p className="mt-3 text-[9px] font-semibold text-[#3159b7] lg:text-[10px]">{t("insight")}</p>
+                  <p className="text-pretty mt-1.5 text-[10px] font-medium leading-4 text-[#34435f] lg:text-xs lg:leading-5">{t("insightCopy")}</p>
+                  <span className="mt-4 flex min-h-8 items-center gap-1 text-[9px] font-semibold text-[#315fca]">{t("review")} <span aria-hidden="true">→</span></span>
                 </div>
               </div>
             </div>
@@ -140,28 +145,29 @@ function DashboardMockup() {
 }
 
 export function Hero() {
+  const t = useTranslations("Landing.hero");
   return (
     <section id="top" className="relative pb-12 pt-32 sm:pb-16 sm:pt-40">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-20 h-[820px] bg-[radial-gradient(ellipse_70%_48%_at_50%_26%,rgba(91,129,245,.18),rgba(154,132,235,.07)_40%,transparent_72%)]" />
       <div aria-hidden="true" className="hero-grid absolute inset-x-0 top-0 -z-10 h-[780px] opacity-65" />
       <div className="mx-auto max-w-5xl px-5 text-center">
         <div className="hero-enter mx-auto inline-flex items-center gap-2 rounded-full bg-white/75 px-3 py-1.5 text-xs font-semibold text-[#315bc0] shadow-[0_0_0_1px_rgba(37,99,235,.13),0_6px_20px_-12px_rgba(37,99,235,.5)] backdrop-blur-md">
-          <Sparkles className="size-3.5" aria-hidden="true" /> AI-powered document assistant
+          <Sparkles className="size-3.5" aria-hidden="true" /> {t("badge")}
         </div>
         <h1 className="hero-enter text-balance mx-auto mt-7 max-w-4xl text-[clamp(3.2rem,7.8vw,6.6rem)] font-semibold leading-[.94] tracking-[-0.065em] text-[#091327]">
-          Turn paperwork into action.
+          {t("title")}
         </h1>
         <p className="hero-enter text-balance mx-auto mt-7 max-w-3xl text-[clamp(1.08rem,2vw,1.45rem)] font-medium leading-[1.45] tracking-[-.025em] text-[#3f4a5e]">
-          PaperPilot understands your documents, finds what matters, and tells you what to do next.
+          {t("lead")}
         </p>
         <p className="hero-enter text-pretty mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#6d7584] sm:text-base sm:leading-7">
-          Upload a document, screenshot, or PDF. PaperPilot finds deadlines, required documents, important details, and turns them into actionable tasks.
+          {t("copy")}
         </p>
         <div className="hero-enter mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href="/dashboard" className="w-full sm:w-auto">Start organizing for free <span aria-hidden="true">→</span></ButtonLink>
-          <ButtonLink href="#how-it-works" variant="secondary" className="w-full sm:w-auto">See how it works <ArrowDown className="size-4" /></ButtonLink>
+          <ButtonLink href="/dashboard" className="w-full sm:w-auto">{t("start")} <span aria-hidden="true">→</span></ButtonLink>
+          <ButtonLink href="#how-it-works" variant="secondary" className="w-full sm:w-auto">{t("seeHow")} <ArrowDown className="size-4" /></ButtonLink>
         </div>
-        <p className="hero-enter mt-3 text-xs font-medium text-[#858c99]">No credit card required</p>
+        <p className="hero-enter mt-3 text-xs font-medium text-[#858c99]">{t("noCard")}</p>
       </div>
       <DashboardMockup />
     </section>
