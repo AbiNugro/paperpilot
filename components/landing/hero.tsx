@@ -35,10 +35,10 @@ const deadlines = [
 function DashboardMockup() {
   return (
     <div className="dashboard-enter relative mx-auto mt-14 max-w-[1100px] px-3 sm:mt-20 sm:px-8 lg:px-12">
-      <div className="label-enter label-one absolute -left-2 top-[18%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:left-0">
+      <div className="label-enter label-one absolute left-4 top-[18%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:left-0">
         <CheckCircle2 className="size-4 text-[#2f77e7]" /> Document analyzed
       </div>
-      <div className="label-enter label-two absolute -right-1 top-[35%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:right-0">
+      <div className="label-enter label-two absolute right-4 top-[35%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex lg:right-0">
         <WandSparkles className="size-4 text-[#4f46e5]" /> 4 actions generated
       </div>
       <div className="label-enter label-three absolute -bottom-4 right-[15%] z-20 hidden items-center gap-2 rounded-[10px] bg-white px-3 py-2 text-xs font-semibold text-[#25314a] shadow-[0_0_0_1px_rgba(15,23,42,.08),0_12px_30px_-15px_rgba(15,23,42,.35)] md:flex">
@@ -85,9 +85,9 @@ function DashboardMockup() {
                   <p className="text-[10px] font-medium text-[#788193] lg:text-xs">Good morning, Alex</p>
                   <h3 className="mt-1 text-base font-semibold tracking-[-.035em] text-[#10182a] sm:text-lg lg:text-2xl">Your paperwork, under control.</h3>
                 </div>
-                <button aria-label="Notifications" className="flex size-9 shrink-0 items-center justify-center rounded-[9px] bg-white text-[#5f6878] shadow-[0_0_0_1px_rgba(15,23,42,.07)] transition-transform duration-150 ease-out active:scale-[0.96]">
+                <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-[9px] bg-white text-[#5f6878] shadow-[0_0_0_1px_rgba(15,23,42,.07)]">
                   <span className="relative"><CalendarDays className="size-4" /><span className="absolute -right-1 -top-1 size-1.5 rounded-full bg-[#e8a83e] ring-2 ring-white" /></span>
-                </button>
+                </span>
               </div>
 
               <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:grid-cols-4 lg:gap-3">
@@ -96,7 +96,7 @@ function DashboardMockup() {
                     <p className="tabular-nums text-lg font-semibold tracking-[-.04em] text-[#131d31] lg:text-2xl">{number}</p>
                     <div className="mt-2 flex items-center gap-1.5">
                       <span className={`size-1.5 rounded-full ${tone === "blue" ? "bg-[#5a83e8]" : tone === "amber" ? "bg-[#d9a343]" : tone === "green" ? "bg-[#56a875]" : "bg-[#d1726c]"}`} />
-                      <span className="truncate text-[8px] font-medium text-[#798192] lg:text-[9px]">{label}</span>
+                      <span className="text-[9px] font-medium leading-3 text-[#798192]">{label}</span>
                     </div>
                   </div>
                 ))}
@@ -106,7 +106,7 @@ function DashboardMockup() {
                 <div className="rounded-[12px] bg-white p-3 shadow-[0_0_0_1px_rgba(15,23,42,.06)] lg:p-4">
                   <div className="mb-2 flex items-center justify-between">
                     <h4 className="text-[11px] font-semibold text-[#222c41] lg:text-xs">Upcoming deadlines</h4>
-                    <button className="min-h-8 rounded-md px-2 text-[9px] font-semibold text-[#3b68d0]">View all</button>
+                    <span className="px-2 py-2 text-[9px] font-semibold text-[#3b68d0]">View all</span>
                   </div>
                   <div className="divide-y divide-black/[.055]">
                     {deadlines.map(([title, date, detail, tone]) => (
@@ -128,7 +128,7 @@ function DashboardMockup() {
                   <div className="flex size-8 items-center justify-center rounded-[8px] bg-white text-[#4a66db] shadow-[0_0_0_1px_rgba(37,99,235,.08)]"><Sparkles className="size-4" /></div>
                   <p className="mt-3 text-[9px] font-semibold text-[#3159b7] lg:text-[10px]">PaperPilot Insight</p>
                   <p className="text-pretty mt-1.5 text-[10px] font-medium leading-4 text-[#34435f] lg:text-xs lg:leading-5">You have 3 documents requiring action this week.</p>
-                  <button className="mt-4 flex min-h-8 items-center gap-1 text-[9px] font-semibold text-[#315fca]">Review actions <span aria-hidden="true">→</span></button>
+                  <span className="mt-4 flex min-h-8 items-center gap-1 text-[9px] font-semibold text-[#315fca]">Review actions <span aria-hidden="true">→</span></span>
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@ export function Hero() {
           Upload a document, screenshot, or PDF. PaperPilot finds deadlines, required documents, important details, and turns them into actionable tasks.
         </p>
         <div className="hero-enter mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href="#pricing" className="w-full sm:w-auto">Start organizing for free <span aria-hidden="true">→</span></ButtonLink>
+          <ButtonLink href="/dashboard" className="w-full sm:w-auto">Start organizing for free <span aria-hidden="true">→</span></ButtonLink>
           <ButtonLink href="#how-it-works" variant="secondary" className="w-full sm:w-auto">See how it works <ArrowDown className="size-4" /></ButtonLink>
         </div>
         <p className="hero-enter mt-3 text-xs font-medium text-[#858c99]">No credit card required</p>

@@ -19,7 +19,7 @@ import { FinalCta, Footer } from "@/components/landing/footer";
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
+    <main>
       <Navbar />
       <Hero />
       <TrustStrip />

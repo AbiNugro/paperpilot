@@ -1,13 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
 export function Brand({
   inverse = false,
   compact = false,
+  priority = false,
 }: {
   inverse?: boolean;
   compact?: boolean;
+  priority?: boolean;
 }) {
   return (
     <span className={`inline-flex items-center ${compact ? "gap-1.5" : "gap-2.5"}`}>
@@ -18,7 +21,7 @@ export function Brand({
           width={60}
           height={60}
           className={`absolute left-1/2 top-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 ${compact ? "size-10" : "size-[60px]"}`}
-          priority
+          priority={priority}
         />
       </span>
       <span className={`${compact ? "text-[11px]" : "text-[17px]"} font-semibold tracking-[-0.025em] ${inverse ? "text-white" : "text-[#10182b]"}`}>
@@ -33,11 +36,13 @@ export function ButtonLink({
   children,
   variant = "primary",
   className = "",
+  onClick,
 }: {
   href: string;
   children: ReactNode;
   variant?: "primary" | "secondary" | "light" | "ghost-light";
   className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
   const variants = {
     primary:
@@ -50,11 +55,18 @@ export function ButtonLink({
       "bg-white/8 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.2)] hover:bg-white/13",
   };
 
-  return (
-    <a
+  const linkClassName = `group inline-flex min-h-11 items-center justify-center gap-2 rounded-[11px] px-5 py-2.5 text-sm font-semibold transition-[transform,background-color,box-shadow] duration-150 ease-out hover:-translate-y-px active:translate-y-0 active:scale-[0.96] ${variants[variant]} ${className}`;
+
+  return href.startsWith("/") || href.startsWith("#") ? (
+    <Link
       href={href}
-      className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-[11px] px-5 py-2.5 text-sm font-semibold transition-[transform,background-color,box-shadow] duration-150 ease-out hover:-translate-y-px active:translate-y-0 active:scale-[0.985] ${variants[variant]} ${className}`}
+      onClick={onClick}
+      className={linkClassName}
     >
+      {children}
+    </Link>
+  ) : (
+    <a href={href} onClick={onClick} className={linkClassName}>
       {children}
     </a>
   );
@@ -115,12 +127,12 @@ export function StatusPill({
 
 export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a
+    <Link
       href={href}
       className="group inline-flex min-h-11 items-center gap-2 py-2 text-sm font-semibold text-[#245eea] transition-colors duration-150 ease-out hover:text-[#173f9e]"
     >
       {children}
       <ArrowRight className="size-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5" aria-hidden="true" />
-    </a>
+    </Link>
   );
 }

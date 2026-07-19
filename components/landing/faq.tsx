@@ -37,12 +37,12 @@ export function Faq() {
                 >
                   <span className="flex-1 text-balance text-[15px] font-semibold tracking-[-.015em] text-[#2a3549] group-hover:text-[#234fae] sm:text-base">{question}</span>
                   <span className="relative flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-white text-[#687180] shadow-[0_0_0_1px_rgba(15,23,42,.08)]">
-                    <Plus className={`absolute size-4 transition-[opacity,filter,scale] duration-300 [transition-timing-function:cubic-bezier(.2,0,0,1)] ${isOpen ? "scale-[.25] opacity-0 blur-[4px]" : "scale-100 opacity-100 blur-0"}`} />
-                    <Minus className={`absolute size-4 transition-[opacity,filter,scale] duration-300 [transition-timing-function:cubic-bezier(.2,0,0,1)] ${isOpen ? "scale-100 opacity-100 blur-0" : "scale-[.25] opacity-0 blur-[4px]"}`} />
+                    <Plus aria-hidden="true" className={`absolute size-4 transition-[opacity,filter,scale] duration-300 [transition-timing-function:cubic-bezier(.2,0,0,1)] ${isOpen ? "scale-[.25] opacity-0 blur-[4px]" : "scale-100 opacity-100 blur-0"}`} />
+                    <Minus aria-hidden="true" className={`absolute size-4 transition-[opacity,filter,scale] duration-300 [transition-timing-function:cubic-bezier(.2,0,0,1)] ${isOpen ? "scale-100 opacity-100 blur-0" : "scale-[.25] opacity-0 blur-[4px]"}`} />
                   </span>
                 </button>
                 <div className={`grid transition-[grid-template-rows,opacity] duration-200 [transition-timing-function:var(--ease-out)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                  <div id={contentId} className="overflow-hidden">
+                  <div id={contentId} inert={!isOpen} aria-hidden={!isOpen} className="overflow-hidden">
                     <p className="text-pretty max-w-2xl pb-6 pr-12 text-sm leading-6 text-[#687181] sm:text-[15px] sm:leading-7">{answer}</p>
                   </div>
                 </div>

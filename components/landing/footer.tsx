@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Brand, ButtonLink } from "./shared";
 
 export function FinalCta() {
@@ -13,7 +14,7 @@ export function FinalCta() {
           <h2 className="text-balance mx-auto max-w-3xl text-[clamp(2.4rem,5vw,4.7rem)] font-semibold leading-[1] tracking-[-.055em]">Your paperwork isn&apos;t going away. The confusion can.</h2>
           <p className="text-pretty mx-auto mt-6 max-w-xl text-base leading-7 text-[#dbe6ff] sm:text-lg">Let PaperPilot turn documents into clear next steps.</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink href="#pricing" variant="light" className="w-full sm:w-auto">Start organizing for free <ArrowRight className="size-4" /></ButtonLink>
+            <ButtonLink href="/dashboard" variant="light" className="w-full sm:w-auto">Start organizing for free <ArrowRight className="size-4" /></ButtonLink>
             <ButtonLink href="#how-it-works" variant="ghost-light" className="w-full sm:w-auto">See how it works</ButtonLink>
           </div>
         </div>
@@ -24,8 +25,8 @@ export function FinalCta() {
 
 const footerGroups = [
   { title: "Product", links: [["Features", "#features"], ["How it works", "#how-it-works"], ["Pricing", "#pricing"]] },
-  { title: "Resources", links: [["Help Center", "#"], ["Privacy", "#"], ["Terms", "#"]] },
-  { title: "Company", links: [["About", "#"], ["Contact", "mailto:hello@paperpilot.ai"]] },
+  { title: "Resources", links: [["Help Center", "/help"], ["Privacy", "/privacy"], ["Terms", "/terms"]] },
+  { title: "Company", links: [["About", "/about"], ["Contact", "mailto:hello@paperpilot.ai"]] },
 ];
 
 export function Footer() {
@@ -42,7 +43,15 @@ export function Footer() {
             <div key={group.title}>
               <h3 className="text-xs font-semibold text-white">{group.title}</h3>
               <ul className="mt-4 space-y-1">
-                {group.links.map(([label, href]) => <li key={label}><a href={href} className="inline-flex min-h-10 items-center text-xs text-[#8995ab] transition-colors duration-150 ease-out hover:text-white">{label}</a></li>)}
+                {group.links.map(([label, href]) => (
+                  <li key={label}>
+                    {href.startsWith("/") || href.startsWith("#") ? (
+                      <Link href={href} className="inline-flex min-h-10 items-center text-xs text-[#8995ab] transition-colors duration-150 ease-out hover:text-white">{label}</Link>
+                    ) : (
+                      <a href={href} className="inline-flex min-h-10 items-center text-xs text-[#8995ab] transition-colors duration-150 ease-out hover:text-white">{label}</a>
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           ))}

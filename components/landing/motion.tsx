@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 export function MotionObserver({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
   useEffect(() => {
     document.documentElement.dataset.motionReady = "true";
 
@@ -28,7 +31,7 @@ export function MotionObserver({ children }: { children: ReactNode }) {
       observer.disconnect();
       delete document.documentElement.dataset.motionReady;
     };
-  }, []);
+  }, [pathname]);
 
   return children;
 }

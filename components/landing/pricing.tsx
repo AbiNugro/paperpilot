@@ -14,7 +14,7 @@ export const pricingPlans = [
       "Action checklists",
     ],
     cta: "Start free",
-    href: "#top",
+    href: "/dashboard",
   },
   {
     name: "Pro",
@@ -29,7 +29,7 @@ export const pricingPlans = [
       "Priority support",
     ],
     cta: "Get PaperPilot Pro",
-    href: "#top",
+    href: "/dashboard",
     popular: true,
   },
   {

@@ -37,6 +37,10 @@ html {
   scroll-padding-top: 88px;
 }
 
+section[id] {
+  scroll-margin-top: 88px;
+}
+
 body {
   margin: 0;
   background: var(--paper);
@@ -90,7 +94,7 @@ summary:focus-visible {
 .testimonial-track {
   display: flex;
   width: max-content;
-  animation: testimonial-marquee 72s linear infinite;
+  animation: testimonial-marquee 45s linear infinite;
   animation-play-state: running;
   will-change: transform;
 }
@@ -101,10 +105,6 @@ html[data-motion-ready] .testimonial-marquee:not([data-revealed="true"]) .testim
 
 html[data-motion-ready] .testimonial-marquee[data-revealed="true"] .testimonial-track {
   animation-play-state: running;
-}
-
-html[data-motion-ready] .testimonial-marquee:hover .testimonial-track {
-  animation-play-state: paused;
 }
 
 .testimonial-group {
@@ -122,13 +122,9 @@ html[data-motion-ready] .testimonial-marquee:hover .testimonial-track {
 @media (hover: hover) and (pointer: fine) {
   .testimonial-marquee:hover .testimonial-track { animation-play-state: paused; }
   .testimonial-marquee .testimonial-card:hover {
-    transform: translateY(0);
+    transform: translateY(-2px);
     box-shadow: 0 0 0 1px rgba(37, 99, 235, .12), 0 18px 42px -22px rgba(37, 99, 235, .25);
   }
-}
-
-@media (max-width: 767px) {
-  .testimonial-track { animation-duration: 84s; }
 }
 
 a.group > svg {
@@ -392,5 +388,9 @@ html[data-motion-ready] [data-revealed="true"] .checklist-item:nth-child(5) { an
   .testimonial-track {
     animation: none !important;
     transform: none !important;
+  }
+
+  .testimonial-group[aria-hidden="true"] {
+    display: none;
   }
 }
